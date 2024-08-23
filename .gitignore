@@ -1,0 +1,39 @@
+# Ignore Terraform state files
+*.tfstate
+*.tfstate.*
+*.backup
+tfplan
+
+# Ignore Terraform crash log
+crash.log
+
+# Ignore .terraform directory (used for caching modules and providers)
+.terraform/
+.terraform.lock.hcl
+
+# Ignore local variable files
+*.tfvars
+
+# Ignore override files as they are usually machine-specific
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore sensitive variable files
+*secrets*.tfvars
+*credentials*.tfvars
+
+# Ignore output files
+outputs.tf
+
+# Ignore provider binaries
+terraform-provider-azurerm_v*.exe
+
+# Ignore temporary files
+*.bak
+*.swp
+*.tmp
+
+# Ignore the graph.png file if it's not meant to be included
+graph.png
