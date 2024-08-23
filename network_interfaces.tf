@@ -1,5 +1,4 @@
-# network_interfaces.tf
-resource "azurerm_network_interface" "main" {
+resource "azurerm_network_interface" "secondary" {
   for_each            = toset(local.nic_names)
   name                = each.value
   location            = azurerm_resource_group.example.location

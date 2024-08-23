@@ -1,4 +1,3 @@
-# main.tf
 resource "azurerm_resource_group" "example" {
   name     = local.resource_group_name
   location = var.location
@@ -18,12 +17,25 @@ resource "azurerm_subnet" "internal" {
   address_prefixes     = ["10.0.2.0/24"]
 }
 
+resource "azurerm_network_interface" "main" {
+  count               = 2
+  name                = "${var.prefix}-nic-${count.index}"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.internal.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
+
 resource "azurerm_virtual_machine" "main" {
   count                 = 2
   name                  = "${var.prefix}-vm-${count.index}"
   location              = azurerm_resource_group.example.location
   resource_group_name   = azurerm_resource_group.example.name
-  network_interface_ids = [for nic in azurerm_network_interface.main : nic.id]
+  network_interface_ids = [azurerm_network_interface.main[count.index].id]
   vm_size               = "Standard_DS1_v2"
 
   storage_image_reference {
