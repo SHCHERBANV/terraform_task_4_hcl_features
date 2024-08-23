@@ -7,9 +7,8 @@ tfplan
 # Ignore Terraform crash log
 crash.log
 
-# Ignore .terraform directory (used for caching modules and providers)
+# Ignore .terraform directory and everything inside it
 .terraform/
-.terraform.lock.hcl
 
 # Ignore local variable files
 *.tfvars
@@ -27,13 +26,7 @@ override.tf.json
 # Ignore output files
 outputs.tf
 
-# Ignore provider binaries
-terraform-provider-azurerm_v*.exe
-
 # Ignore temporary files
 *.bak
 *.swp
 *.tmp
-
-# Ignore the graph.png file if it's not meant to be included
-graph.png
